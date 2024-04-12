@@ -1,0 +1,31 @@
+{% extends "base2.html" %}
+
+{% block content %}
+    <h1>Shopping Cart</h1>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Action</th>
+        </tr>
+
+        <!-- view_cart.html -->
+        {% for cart_item in cart_items %}
+        <tr>
+            <td>{{ cart_item.product.name }}</td>
+            <td>Rs.{{ cart_item.product.rate_per_unit }}</td>
+            <td>{{ cart_item.quantity }}</td>
+            <td>Rs.{{ cart_item.product.rate_per_unit * cart_item.quantity }}</td>
+            <td><a href="{{ url_for('views.remove_from_cart', product_id=cart_item.product.id) }}" class="remove-button">Remove</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p class="total-amount">Total Amount: Rs.{{ total_amount }}</p>
+
+    <!-- Add the Buy All button -->
+    <div class="buy-all-button">
+        <a href="{{ url_for('views.buy_all') }}" class="btn btn-success">Buy All</a>
+    </div>
+{% endblock %}

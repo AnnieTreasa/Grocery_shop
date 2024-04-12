@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Edit Product</h1>
+    <form method="POST" action="{{ url_for('views.edit_product', product_id=product.id) }}">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ product.name }}" required>
+        <br>
+        <label for="rate_per_unit">Rate per Unit:</label>
+        <input type="number" step="0.01" id="rate_per_unit" name="rate_per_unit" value="{{ product.price }}" required>
+        <br>
+        <label for="quantity">Quantity:</label>
+        <input type="number" step="0.01" id="quantity" name="quantity" value="{{ product.quantity }}" required>
+        <br>
+        <label for="section">Section:</label>
+        <select id="section" name="section">
+            {% for section in sections %}
+                <option value="{{ section.id }}" {% if section.id == product.section_id %}selected{% endif %}>{{ section.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="unit">Unit:</label>
+        <select id="unit" name="unit">
+            {% for unit_option in unit_options %}
+                <option value="{{ unit_option }}" {% if unit_option == product.unit %}selected{% endif %}>{{ unit_option }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="expiration_date">expiration_date:</label>
+        <input type="text" id="expiration_date" name="expiration_date" value="{{ product.expiration_date }}" required>
+        <br>
+        <input type="submit" value="Update">
+    </form>
+{% endblock %}

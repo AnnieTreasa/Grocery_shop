@@ -1,0 +1,133 @@
+{% extends "base2.html" %}
+{% block title %} Summary {% endblock %}
+
+{% block content %}
+
+<!-- Display heading and current date and time -->
+<h1>Summary</h1>
+<br>
+<br>
+<p>Date and Time: {{ current_datetime }}</p>
+<br><br>
+<!-- Display total sales -->
+<h3>Weekly Sales:</h3>
+<br>
+<p>Total Sales: {{ total_sales }}</p>
+
+<!-- Display the total sales per category table -->
+<h3>Total Sales per Category:</h3>
+<table>
+  <tr>
+    <th>Category</th>
+    <th>Total Sales</th>
+  </tr>
+  {% for category in category_sales_data %}
+  <tr>
+    <td>{{ category }}</td>
+    <td>{{ category_sales_data[category] }}</td>
+  </tr>
+  {% endfor %}
+</table>
+<br>
+<br>
+<br>
+<!-- Display the out-of-stock products table -->
+<h3>Out of Stock Products:</h3>
+{% if out_of_stock_products %}
+<table>
+  <tr>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Category</th>
+  </tr>
+  {% for product in out_of_stock_products %}
+  <tr>
+    <td>{{ product['Product'] }}</td>
+    <td>{{ product['Quantity'] }}</td>
+    <td>{{ product['Category'] }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No products out of stock.</p>
+{% endif %}
+
+<br><br>
+<h3>In Stock of Products:</h3>
+{% if stock_products %}
+<table>
+  <tr>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Category</th>
+  </tr>
+  {% for product in stock_products %}
+  <tr>
+    <td>{{ product['Product'] }}</td>
+    <td>{{ product['Quantity'] }}</td>
+    <td>{{ product['Category'] }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No products in stock.</p>
+{% endif %}
+
+<br><br><br>
+
+
+<!-- Display expired products -->
+<h3>Expired Products:</h3>
+{% if expired_products %}
+<table>
+  <tr>
+    <th>Product</th>
+    <th>Expiration Date</th>
+    <th>Days to Expiration</th>
+  </tr>
+  {% for product in expired_products %}
+  <tr>
+    <td>{{ product.name }}</td>
+    <td>{{ product.expiration_date }}</td>
+    <td>Expired</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No expired products.</p>
+{% endif %}
+<br><br><br>
+<!-- Display products expiring within 2 days -->
+<h3>Products Expiring Within 2 Days:</h3>
+{% if expiring_products %}
+<table>
+  <tr>
+    <th>Product</th>
+    <th>Expiration Date</th>
+    <th>Days to Expiration</th>
+  </tr>
+  {% for product in expiring_products %}
+  <tr>
+    <td>{{ product.name }}</td>
+    <td>{{ product.expiration_date }}</td>
+    <td>{{ (product.expiration_date - current_datetime.date()).days }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No products expiring within 2 days.</p>
+{% endif %}
+
+
+
+<br><br><br>
+<!-- Display the bar chart -->
+<h3>Product Distribution:</h3>
+{{ product_bar_chart_html|safe }}
+
+<!-- Display the pie chart -->
+<h3>Category Sales Distribution:</h3>
+{{ category_pie_chart_html|safe }}
+
+
+{% endblock %}

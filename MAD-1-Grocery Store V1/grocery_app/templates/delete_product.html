@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Delete Product</h1>
+    <p>Are you sure you want to delete the product "{{ product.name }}"?</p>
+    <form method="POST" action="{{ url_for('views.delete_product', product_id=product.id) }}">
+        <input type="submit" value="Delete">
+    </form>
+    <a href="{{ url_for('views.list_products') }}">Cancel</a>
+{% endblock %}
+

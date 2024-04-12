@@ -1,0 +1,54 @@
+{% extends "base2.html" %}
+{% block title %} Search Results {% endblock %}
+
+{% block content %}
+
+<h1>Search Results</h1>
+<p>Search Query: {{ query }}</p>
+
+{% if sections %}
+  <h2>Sections/Categories:</h2>
+  <ul>
+    {% for section in sections %}
+      <li>
+        {{ section.name }}
+        <a href="#category-{{ section.id }}" class="view-products-btn btn btn-secondary">View Products</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No sections found matching the search query.</p>
+{% endif %}
+
+{% if products %}
+  <h2>Products:</h2>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Available Quantity</th>
+      <th>Add to Cart</th>
+      <!-- Add more columns as needed, e.g., Manufacture Date, Category, etc. -->
+    </tr>
+    {% for product in products %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.rate_per_unit }}</td>
+        <td>{{ product.quantity }}</td>
+      
+        <td>
+          <form action="{{ url_for('views.add_to_cart', product_id=product.id) }}" method="post">
+            <input type="number" name="quantity" min="1" max="{{ product.quantity }}" value="1" class="quantity-input">
+            <button type="submit" class="add-to-cart-btn btn btn-primary">Add to Cart</button>
+          </form>
+        </td>
+        <!-- Add more columns as needed, e.g., Manufacture Date, Category, etc. -->
+      </tr>
+    {% endfor %}
+  </table>
+{% else %}
+  <p>No products found matching the search query.</p>
+{% endif %}
+
+{% endblock %}
+

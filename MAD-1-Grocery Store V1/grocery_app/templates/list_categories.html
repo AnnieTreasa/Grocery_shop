@@ -1,0 +1,59 @@
+{% extends "base2.html" %}
+
+{% block content %}
+    <h1>List of Categories</h1>
+    <br>
+    <div class="table-container">
+    <table class="table table-striped custom-table">
+        <thead>
+            <tr>
+                <th>Category Name</th>
+                <th>Actions</th>
+                <th>Products</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if categories %}
+                {% for category in categories %}
+                    <tr>
+                        <td>{{ category.name }}</td>
+                        <td>
+                            <a href="{{ url_for('views.edit_category', category_id=category.id) }}" class="btn btn-secondary">Edit</a>
+                            <a href="{{ url_for('views.delete_category', category_id=category.id) }}" class="btn btn-danger">Delete</a>
+                        </td>
+                        <td>
+                            {% if category.products %}
+                                <ul>
+                                    {% for product in category.products %}
+                                        <li>
+                                            {{ product.name }} - Price: {{ product.rate_per_unit }} - Quantity: {{ product.quantity }}
+                                            <a href="{{ url_for('views.edit_product', product_id=product.id) }}">Edit</a>
+                                            <a href="{{ url_for('views.delete_product', product_id=product.id) }}">Delete</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>No products added.</p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="3">No category created.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+    
+    <style>
+        .custom-table {
+            width: 100% !important; /* You can adjust this value as needed */
+        }
+    </style>
+ 
+<div class="add-category-btn-container" style="position: fixed; bottom: 20px; right: 20px;">
+    <a href="{{ url_for('views.create_category') }}" class="btn btn-primary">Create New Category</a>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+<!-- app/templates/delete_category.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+    <h1>Delete Category</h1>
+    <p>Are you sure you want to delete the category "{{ category.name }}"?</p>
+    <form method="POST" action="{{ url_for('views.delete_category', category_id=category.id) }}">
+        <input type="submit" value="Delete">
+    </form>
+    <a href="{{ url_for('views.list_categories') }}">Cancel</a>
+{% endblock %}

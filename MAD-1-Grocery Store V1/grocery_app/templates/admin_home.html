@@ -1,0 +1,140 @@
+{% extends "base2.html" %}
+{% block title %}Admin Home{% endblock %}
+
+{% block content %}
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{{ url_for('static', filename='img/image6.jpg') }}" class="carousel-bg " alt="Slide 1">
+        </div>
+        <div class="carousel-item">
+            <img src="{{ url_for('static', filename='img/image2.jpg') }}" class="d-block w-100" alt="Slide 2">
+        </div>
+        <div class="carousel-item">
+            <img src="{{ url_for('static', filename='img/image3.webp') }}" class="d-block w-100" alt="Slide 3">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="sidebar">
+            <h3>Actions</h3>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link btn btn-success" href="{{ url_for('views.create_category') }}">Add New Category</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-info" href="{{ url_for('views.list_categories') }}">List Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-success" href="{{ url_for('views.create_product') }}">Add New Product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-info" href="{{ url_for('views.list_products') }}">List Products</a>
+                </li>
+                                <li class="nav-item">
+                    <a class="nav-link btn btn-warning" href="{{ url_for('summary.summary') }}">Summary</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-9">
+        
+
+        <!-- Categories and Products sections -->
+        <div class="category-separator"></div> 
+    <h2>Categories</h2>
+    <div class="category-separator"></div> 
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% if categories %}
+            {% for category in categories %}
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-header bg-info text-white" style="font-size: 1.5rem;">
+                        <a name="category{{ category.id }}"></a>{{ category.name }}
+                        <div class="category-actions">
+                            <a href="{{ url_for('views.create_product', category_id=category.id) }}" class="btn btn-success">Add Product</a>
+                            <a href="{{ url_for('views.edit_category', category_id=category.id) }}" class="btn btn-secondary">Edit</a>
+                            <a href="{{ url_for('views.delete_category', category_id=category.id) }}" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No category created.</p>
+        {% endif %}
+    </div>
+
+    <div class="category-separator"></div> 
+
+    <h2>Products</h2>
+    
+    {% if categories %}
+        {% for category in categories %}
+        <div class="category-separator"></div> 
+            <h3>{{ category.name }} Products</h3>
+            <div class="category-separator"></div> 
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% if category.products %}
+                    {% for product in category.products %}
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <p class="card-text">Price: Rs.{{ product.rate_per_unit }} - Quantity Available: {{ product.quantity }}</p>
+                                <a href="{{ url_for('views.edit_product', product_id=product.id) }}">Edit</a>
+                                <a href="{{ url_for('views.delete_product', product_id=product.id) }}">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No products added.</p>
+                    
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No category created.</p>
+        
+    {% endif %}
+
+    </div>
+</div>
+
+
+
+<style>
+    .carousel-bg {
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        height: 450px;
+    }
+
+    .sidebar {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 5px;
+        height: 100%;
+        position: sticky;
+        top: 0;
+    }
+
+    .button-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 10px;
+        z-index: 10;
+    }
+</style>
+{% endblock %}
+
+
+
+
+

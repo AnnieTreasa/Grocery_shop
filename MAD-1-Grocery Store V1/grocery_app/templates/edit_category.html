@@ -1,0 +1,13 @@
+<!-- app/templates/edit_category.html -->
+
+{% extends "base2.html" %}
+
+{% block content %}
+    <h1>Edit Category</h1>
+    <form method="POST" action="{{ url_for('views.edit_category', category_id=category.id) }}">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ category.name }}" required>
+        <br>
+        <input type="submit" value="Update">
+    </form>
+{% endblock %}

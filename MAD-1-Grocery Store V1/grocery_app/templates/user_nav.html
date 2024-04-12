@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" id="home" href="/home">Home</a>
+            <a class="nav-item nav-link" id="cart" href="/cart">Cart</a>
+            <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categories
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                        {% for category in categories %}
+                            <a class="dropdown-item" href="#category-{{ category.id }}">{{ category.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            
+            
+        </div>
+    </div>
+    <div>
+        <form action="/search" method="GET">
+            <input type="text" name="q" placeholder="Search...">
+            <label for="search-type">Search Type:</label>
+            <select name="search_type" id="search-type">
+                <option value="sections">Sections</option>
+                <option value="products">Products</option>
+            </select>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+</nav>

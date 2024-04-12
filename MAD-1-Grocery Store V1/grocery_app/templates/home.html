@@ -1,0 +1,120 @@
+{% extends "base2.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{{ url_for('static', filename='img/image1.jpg') }}" class="d-block w-100" alt="Slide 1">
+        </div>
+        <div class="carousel-item">
+            <img src="{{ url_for('static', filename='img/image2.jpg') }}" class="d-block w-100" alt="Slide 2">
+        </div>
+        <div class="carousel-item">
+            <img src="{{ url_for('static', filename='img/image3.webp') }}" class="d-block w-100" alt="Slide 3">
+        </div>
+    </div>
+</div>
+<br>
+<br>
+    <!-- Rest of your content goes here -->
+    <div class="container-fluid">
+        <!-- Loop through categories and products -->
+        <div class="row">
+            <div class="col-4">
+                <h3>Categories</h3>
+                <div id="category-list" class="list-group">
+                    {% for category in categories %}
+                        <a class="list-group-item list-group-item-action" href="#category-{{ category.id }}">{{ category.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="col-8">
+                <div data-bs-spy="scroll" data-bs-target="#category-list" data-bs-offset="0" class="scrollspy-example">
+                    {% for category in categories %}
+                    <br>
+                        <h4 id="category-{{ category.id }}">{{ category.name }}</h4>
+                        {% for product in category.products %}
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    {{ product.name }}
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Price: Rs.{{ product.rate_per_unit }}</h5>
+                                    <form action="{{ url_for('views.add_to_cart', product_id=product.id) }}" method="post">
+                                        <label for="quantity{{ product.id }}" class="quantity-label">Quantity: </label>
+                                        <input type="number" name="quantity" id="quantity{{ product.id }}" min="1" value="1" class="quantity-input" />
+                                        <button type="submit" class="add-to-cart-btn btn btn-primary">Add to Cart</button>
+                                    </form>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    <br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="add-category-btn-container" style="position: fixed; bottom: 20px; right: 20px;">
+        <a href="{{ url_for('views.view_cart') }}" class="btn btn-success">View Cart</a>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

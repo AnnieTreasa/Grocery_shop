@@ -1,0 +1,157 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.add-category-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 24px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 50%;
+    padding: 10px;
+    text-decoration: none;
+  }
+  
+  .nav {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.nav li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #333;
+}
+
+.messages {
+    color: #007bff;
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Add this to your CSS stylesheet */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.remove-button {
+    color: red;
+    text-decoration: none;
+}
+
+.total-amount {
+    text-align: right;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* styles.css */
+.welcome-title {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.categories-section {
+    margin-top: 30px;
+}
+
+.categories-heading {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.category-item {
+    margin-bottom: 20px;
+}
+
+.product-item {
+    list-style: none;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+}
+
+.product-name {
+    font-weight: bold;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+}
+
+.product-price {
+    margin-right: 10px;
+}
+
+.product-quantity {
+    margin-right: 10px;
+    color: #666;
+}
+
+.quantity-label {
+    margin-right: 5px;
+}
+
+.quantity-input {
+    width: 40px;
+    text-align: center;
+}
+
+.add-to-cart-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.view-cart-btn {
+    display: block;
+    margin-top: 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.add-category-btn-bottom-left {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+
+.category-separator {
+    margin: 2rem 0; /* Adjust the margin as needed */
+    border-top: 1px solid #ccc; /* Add a border at the top */
+}
+
+
+.custom-table {
+    width: 200%; /* Adjust this value as needed */
+}
+

@@ -1,0 +1,29 @@
+{% extends "base2.html" %}
+
+{% block content %}
+    <h1>Confirm Purchase</h1>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+
+        <!-- buy_all.html -->
+        {% for cart_item in cart_items %}
+        <tr>
+            <td>{{ cart_item.product.name }}</td>
+            <td>${{ cart_item.product.rate_per_unit }}</td>
+            <td>{{ cart_item.quantity }}</td>
+            <td>${{ cart_item.product.rate_per_unit * cart_item.quantity }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p class="total-amount">Total Amount: Rs.{{ total_amount }}</p>
+
+    <form action="{{ url_for('views.buy_all') }}" method="post">
+        <button type="submit" class="btn btn-success">Confirm Purchase</button>
+    </form>
+{% endblock %}
